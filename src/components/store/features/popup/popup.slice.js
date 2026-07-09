@@ -1,26 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  employeePopup: false,
-  deletePopup: false
+    employeePopup: false,
+    deletePopup: false
 }
 
 export const popupSlice = createSlice({
-  name: 'popup',
-  initialState,
-  reducers: {
-    openEmployeePopup: (state, actions) => {
-        state.employeePopup = actions.payload ?? true
+    name: 'popup',
+    initialState,
+    reducers: {
+        openEmployeePopup: (state, actions) => {
+            state.employeePopup = actions.payload ?? true
+        },
+        closeEmployeePopup: (state) => {
+            state.employeePopup = false
+        },
+        openDeletePopup: (state, actions) => {
+            state.deletePopup = actions.payload ?? true
+        },
+        closeDeletePopup: (state) => {
+            state.deletePopup = false
+        }
 
-    },
-    closeEmployeePopup: (state, actions) => {
-        state.employeePopup = false
     }
-
-  }
 })
 
 
-export const { openEmployeePopup, closeEmployeePopup } = popupSlice.actions
+export const { openEmployeePopup, closeEmployeePopup, openDeletePopup, closeDeletePopup } = popupSlice.actions
 
 export default popupSlice.reducer

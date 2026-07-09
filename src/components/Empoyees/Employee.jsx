@@ -2,6 +2,8 @@ import React from 'react'
 import Layout from '../layout/Layout'
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDelete } from "react-icons/md";
+import { useDispatch } from 'react-redux';
+import { openDeletePopup } from '../store/features/popup/popup.slice';
 
 const Employee = () => {
     return (
@@ -18,6 +20,9 @@ const Employee = () => {
 }
 
 const EmployeeCard = () => {
+
+    const dispatch = useDispatch()
+
     return (
         <li className="list-row">
             <div><img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" /></div>
@@ -31,7 +36,7 @@ const EmployeeCard = () => {
             <button className="btn btn-square btn-ghost">
                 <CiEdit className='text-xl'/>
             </button>
-             <button className="btn btn-square btn-ghost">
+             <button  onClick={()=>dispatch(openDeletePopup())}  className="btn btn-square btn-ghost">
                 <MdOutlineDelete className='text-xl'/>
             </button>
             <button className="btn btn-square btn-ghost">

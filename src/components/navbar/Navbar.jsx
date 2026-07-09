@@ -1,8 +1,13 @@
 import React from 'react'
 import Layout from '../layout/Layout'
 import { FaPlus } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { openEmployeePopup } from '../store/features/popup/popup.slice';
 
 const Navbar = () => {
+
+    const dispatch = useDispatch()
+
 
 
     return (
@@ -13,7 +18,7 @@ const Navbar = () => {
                 <a className="btn btn-ghost text-xl">Employees</a>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-ghost btn-circle">
+                <button onClick = {() => dispatch(openEmployeePopup())} className="btn btn-ghost btn-circle">
                    <FaPlus/>
                 </button>
                 <button className="btn btn-ghost btn-circle">

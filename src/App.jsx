@@ -3,12 +3,14 @@ import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
 import Employee from './components/Empoyees/Employee'
 import EmployeePopup from './components/EmployeePopup/EmployeePopup'
+import DeletePopup from './components/deletePopup/DeletePopup'
 
 const App = () => {
   return (
   <div className='min-h-screen w-full flex flex-col'>
 
   <EmployeePopup/>
+  <DeletePopup/>
 
   <Navbar/>
 
@@ -17,6 +19,7 @@ const App = () => {
   </div>
 
   <Footer/>
+  
   </div>
   )
 }
