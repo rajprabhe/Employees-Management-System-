@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../layout/Layout'
 import { FaPlus } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
-import { openEmployeePopup } from '../store/features/popup/popup.slice';
+import { openEmployeePopup } from '../../store/features/popup/popup.slice';
 
 const Navbar = () => {
 

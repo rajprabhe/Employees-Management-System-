@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { closeEmployeePopup } from '../store/features/popup/popup.slice'
+import { closeEmployeePopup } from '../../store/features/popup/popup.slice'
 
 const EmployeePopup = () => {
 
