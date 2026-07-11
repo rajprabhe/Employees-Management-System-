@@ -10,9 +10,8 @@ const employeeSlice = createSlice({
     name: 'employee',
     initialState,
     reducers: {},
-    // perform async task
    
 })
 
-employeeSlice.actions
+export const { } = employeeSlice.actions
 export default employeeSlice.reducer
