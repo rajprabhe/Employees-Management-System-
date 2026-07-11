@@ -1,35 +1,87 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { closeEmployeePopup } from '../../store/features/popup/popup.slice'
+import { postEmployee, updateEmployee } from '../../store/features/empolyee/employee.thunk'
 
 const EmployeePopup = () => {
 
     const dispatch = useDispatch()
     const popup = useSelector(state => state.popup.employeePopup)
 
+    const [formDetails, setFormDetails] = useState({
+        profileUrl: '',
+        name: '',
+        email: '',
+        bio: '',
+        highlight: false
+        
+    })
 
-    if(!popup) return null
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+
+        setFormDetails({
+            ...formDetails,
+            [name]: value
+        })
+    }
+
+    const handleSubmit = async () => {
+        if(popup.id){
+            await dispatch(updateEmployee({
+                id: popup.id,
+                details: formDetails
+            }))
+        }else{
+        await dispatch(postEmployee(formDetails))
+        }
+        dispatch(closeEmployeePopup())
+    }
+
+    useEffect(() => {
+        if (!popup) {
+            setFormDetails({
+                profileUrl: '',
+                name: '',
+                email: '',
+                bio: '',
+                highlight: false
+            })
+        }else if(popup.id){
+            console.log(popup)
+            setFormDetails({
+                profileUrl: popup.profileUrl,
+                name: popup.name,
+                email: popup.email,
+                bio: popup.bio,
+                highlight: false 
+            })
+        }
+    },[popup])
+
+
+    if (!popup) return null
 
     return (
-        <div onClick={() => dispatch(closeEmployeePopup())}className='fixed top-0 left-0 w-full h-full z-20 flex
+        <div onClick={() => dispatch(closeEmployeePopup())} className='fixed top-0 left-0 w-full h-full z-20 flex
                 bg-white/80 items-center justify-center'>
 
             <fieldset onClick={(e) => e.stopPropagation()} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                 <legend className="fieldset-legend"> Employee Details</legend>
 
                 <label className="label"> Profile Url </label>
-                <input type="text" className="input" placeholder="Profile Url" />
+                <input name='profileUrl' value={formDetails.profileUrl} onChange={handleInputChange} type="text" className="input" placeholder="Profile Url" />
 
                 <label className="label"> Name </label>
-                <input type="text" className="input" placeholder="Name" />
+                <input name='name' value={formDetails.name} onChange={handleInputChange} type="text" className="input" placeholder="Name" />
 
                 <label className="label"> Email </label>
-                <input type="email" className="input" placeholder="Email" />
+                <input name='email' value={formDetails.email} onChange={handleInputChange} type="email" className="input" placeholder="Email" />
 
                 <label className="label">Bio</label>
-                <textarea className="textarea h-24" placeholder="Bio"></textarea>
-   
-                <button className="btn btn-neutral mt-4">Submit</button>
+                <textarea name='bio' value={formDetails.bio} onChange={handleInputChange} className="textarea h-24" placeholder="Bio"></textarea>
+
+                <button onClick={handleSubmit} className="btn btn-neutral mt-4">Submit</button>
             </fieldset>
         </div>
     )

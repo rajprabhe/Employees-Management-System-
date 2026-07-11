@@ -13,6 +13,7 @@ export const popupSlice = createSlice({
             state.employeePopup = actions.payload ?? true
         },
         closeEmployeePopup: (state) => {
+            console.log('chal raha hai')
             state.employeePopup = false
         },
         openDeletePopup: (state, actions) => {
